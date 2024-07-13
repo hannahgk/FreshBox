@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            xmlns:viewmodels="clr-namespace:FreshBox.ViewModels" 
+            x:Class="FreshBox.Views.ExpirationListTabbedPage"
+            BarBackgroundColor="#98A866"
+            SelectedTabColor="#bdda60"
+            UnselectedTabColor="#66533F"
+            Title="Expiration List">
+
+  <!--Pages can be added as references or inline-->
+    <TabbedPage.BindingContext>
+        <viewmodels:ItemViewModel/>
+    </TabbedPage.BindingContext>
+
+    <ContentPage Title="Expiring" BackgroundColor="#98A866">
+        <ScrollView>
+        <!--Dates: Expiring-->
+        <StackLayout Margin="10,5,10,5">
+            <Label Text="Today"
+                   TextColor="#f2ebdd"
+                   FontSize="Large"  
+                   FontAttributes="Bold"/>
+            <CollectionView x:Name ="TodayUnexpiredCollection"
+                            HeightRequest="{Binding expiringTodayRowHeight}">
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Opacity=".6"
+                                TextColor="#f2ebdd"
+                                Text="No items are expiring today." />
+                      </StackLayout>
+                   </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="Transparent"
+                            Padding="0">
+                        <Frame CornerRadius="10"
+                        Margin="0,5"
+                        Padding="0,10,0,0"
+                        BackgroundColor="#526E1E"
+                        HasShadow="True">
+                            <xct:Expander Tapped="Expander_Tapped">
+                                <xct:Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="NameLabel"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="20,5,0,0"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    TextColor="#2E420C"/>
+                                    <Label x:Name="ExpiryLabel"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Padding="20,0,0,5"
+                                    FontAttributes="Bold"
+                                    FontSize="Micro"
+                                    Text="{Binding ExpiryDate, StringFormat='Expiring {0:MM/dd/yyyy}'}"
+                                    TextColor="#bdda60"/>
+                                    <Frame CornerRadius="15"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Padding="10,2,10,2"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="#98A866">
+                                        <Label x:Name="ItemQuantityLabel"
+                                        Text="{Binding Quantity, StringFormat='{0:F0}'}" 
+                                        TextColor="#f2ebdd"/>
+                                    </Frame>
+                                    <Image Source="expand.png"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                     Value="True">
+                                                <Setter Property="Source"
+                                                    Value="collapse.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </xct:Expander.Header>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                    x:Name="EatenButton"
+                                    Text="Eaten"
+                                    TextColor="#bdda60"
+                                    BackgroundColor="#728E34"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="EatenButton_Clicked"/>
+                                <Button Grid.Column="1"
+                                    x:Name="DiscardButton"
+                                    Text="Discarded"
+                                    TextColor="RosyBrown"
+                                    BackgroundColor="#605438"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="DiscardButton_Clicked"/>
+                            </Grid>
+                            </xct:Expander>
+                        </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Tomorrow-->
+            <Label Text="Tomorrow"
+                   TextColor="#f2ebdd"
+                   FontSize="Large" 
+                   FontAttributes="Bold"/>
+            <CollectionView x:Name ="TomorrowUnexpiredCollection"
+                            
+                            HeightRequest="{Binding expiringTomorrowRowHeight}">
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Opacity=".6"
+                                TextColor="#f2ebdd"
+                                Text="No items are expiring tomorrow." />
+                      </StackLayout>
+                   </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="Transparent"
+                            Padding="0">
+                        <Frame CornerRadius="10"
+                               Margin="0,5"
+                        Padding="0,10,0,0"
+                        BackgroundColor="#728E34"
+                        HasShadow="True">
+                            <xct:Expander Tapped="Expander_Tapped">
+                                <xct:Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="NameLabel"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="20,5,0,0"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    TextColor="#bdda60"/>
+                                    <Label x:Name="ExpiryLabel"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Padding="20,0,0,5"
+                                    FontAttributes="Bold"
+                                    FontSize="Micro"
+                                    Text="{Binding ExpiryDate, StringFormat='Expiring {0:MM/dd/yyyy}'}"
+                                    TextColor="#394E13"/>
+                                    <Frame CornerRadius="15"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Padding="10,2,10,2"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="#98A866">
+                                        <Label x:Name="ItemQuantityLabel"
+                                        Text="{Binding Quantity, StringFormat='{0:F0}'}" 
+                                        TextColor="#f2ebdd"/>
+                                    </Frame>
+                                    <Image Source="expand.png"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                     Value="True">
+                                                <Setter Property="Source"
+                                                    Value="collapse.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </xct:Expander.Header>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                    x:Name="EatenButton"
+                                    Text="Eaten"
+                                    TextColor="#bdda60"
+                                    BackgroundColor="#526E1E"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="EatenButton_Clicked"/>
+                                <Button Grid.Column="1"
+                                    x:Name="DiscardButton"
+                                    Text="Discarded"
+                                    TextColor="RosyBrown"
+                                    BackgroundColor="#605438"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="DiscardButton_Clicked"/>
+                            </Grid>
+                            </xct:Expander>
+                        </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Later-->
+            <Label Text="Later"
+                   TextColor="#f2ebdd"
+                   FontSize="Large"  
+                   FontAttributes="Bold"/>
+            <CollectionView x:Name="LaterUnexpiredCollection"
+                            HeightRequest="{Binding expiringLaterRowHeight}">
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Opacity=".6"
+                                TextColor="#f2ebdd"
+                                Text="No items are expiring after tomorrow." />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="Transparent"
+                            Padding="0">
+                        <Frame Margin="0,5"
+                        Padding="0,10,0,0"
+                        CornerRadius="10"
+                        BackgroundColor="#bdda60"
+                        HasShadow="True">
+                            <xct:Expander Tapped="Expander_Tapped">
+                                <xct:Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="NameLabel"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="20,5,0,0"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    TextColor="#526E1E"/>
+                                    <Label x:Name="ExpiryLabel"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Padding="20,0,0,5"
+                                    FontAttributes="Bold"
+                                    FontSize="Micro"
+                                    Text="{Binding ExpiryDate, StringFormat='Expiring {0:MM/dd/yyyy}'}"
+                                    TextColor="#728E34"/>
+                                    <Frame CornerRadius="15"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Padding="10,2,10,2"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="#98A866">
+                                        <Label x:Name="ItemQuantityLabel"
+                                        Text="{Binding Quantity, StringFormat='{0:F0}'}" 
+                                        TextColor="#f2ebdd"/>
+                                    </Frame>
+                                    <Image Source="expand.png"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                     Value="True">
+                                                <Setter Property="Source"
+                                                    Value="collapse.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </xct:Expander.Header>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                    x:Name="EatenButton"
+                                    Text="Eaten"
+                                    TextColor="#bdda60"
+                                    BackgroundColor="#728E34"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="EatenButton_Clicked"/>
+                                <Button Grid.Column="1"
+                                    x:Name="DiscardButton"
+                                    Text="Discarded"
+                                    TextColor="RosyBrown"
+                                    BackgroundColor="#605438"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="DiscardButton_Clicked"/>
+                            </Grid>
+                            </xct:Expander>
+                        </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <!--Date: Expired-->
+    <ContentPage Title="Expired" BackgroundColor="#A69A6D">
+        <ScrollView>
+        <!--Dates: Expired-->
+        <!--might need to add defs to stack layout-->
+        <StackLayout Margin="10,15,10,15">
+            <!--Yesterday-->
+            <Label Text="Yesterday"
+                   TextColor="#f2ebdd"
+               FontSize="Large"  
+               FontAttributes="Bold"/>
+            <CollectionView x:Name="YesterdayExpiredCollection"
+                            HeightRequest="{Binding expiredYesterdayRowHeight}">
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Opacity=".6"
+                                TextColor="#f2ebdd"
+                                Text="No items expired yesterday." />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!--space btwn frames - double frame-->
+                        <Frame BackgroundColor="Transparent"
+                            Padding="0">
+                        <Frame Margin="0,5"
+                               Padding="0,10,0,0"
+                            CornerRadius="10"
+                        BackgroundColor="#7A6F44"
+                        HasShadow="True">
+                            <xct:Expander Tapped="Expander_Tapped">
+                                <xct:Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="NameLabel"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="20,5,0,0"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    TextColor="#98A866"/>
+                                    <Label x:Name="ExpiryLabel"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Padding="20,0,0,5"
+                                    FontAttributes="Bold"
+                                    FontSize="Micro"
+                                    Text="{Binding ExpiryDate, StringFormat='Expiring {0:MM/dd/yyyy}'}"
+                                    TextColor="#f2ebdd"/>
+                                    <Frame CornerRadius="15"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Padding="10,2,10,2"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="#98A866">
+                                        <Label x:Name="ItemQuantityLabel"
+                                        Text="{Binding Quantity, StringFormat='{0:F0}'}" 
+                                        TextColor="#f2ebdd"/>
+                                    </Frame>
+                                    <Image Source="expand.png"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                     Value="True">
+                                                <Setter Property="Source"
+                                                    Value="collapse.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </xct:Expander.Header>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                    x:Name="EatenButton"
+                                    Text="Eaten"
+                                    TextColor="#bdda60"
+                                    BackgroundColor="#728E34"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="EatenButton_Clicked"/>
+                                <Button Grid.Column="1"
+                                    x:Name="DiscardButton"
+                                    Text="Discarded"
+                                    TextColor="RosyBrown"
+                                    BackgroundColor="#605438"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="DiscardButton_Clicked"/>
+                            </Grid>
+                            </xct:Expander>
+                        </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Earlier-->
+            <Label Text="Earlier"
+                   TextColor="#f2ebdd"
+               FontSize="Large"
+               FontAttributes="Bold"/>
+            <CollectionView x:Name="EarlierExpiredCollection"
+                            HeightRequest="{Binding expiredEarlierRowHeight}">
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                Opacity=".6"
+                                TextColor="#f2ebdd"
+                                Text="No items expired before yesterday." />
+                      </StackLayout>
+                   </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="Transparent"
+                            Padding="0">
+                        <Frame Margin="0,5"
+                               Padding="0,10,0,0"
+                               CornerRadius="10"
+                        BackgroundColor="#605438"
+                        HasShadow="True">
+                            <xct:Expander Tapped="Expander_Tapped">
+                                <xct:Expander.Header>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="NameLabel"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="20,5,0,0"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    TextColor="#A69A6D"/>
+                                    <Label x:Name="ExpiryLabel"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Padding="20,0,0,5"
+                                    FontAttributes="Bold"
+                                    FontSize="Micro"
+                                    Text="{Binding ExpiryDate, StringFormat='Expiring {0:MM/dd/yyyy}'}"
+                                    TextColor="#98A866"/>
+                                    <Frame CornerRadius="15"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Padding="10,2,10,2"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="#98A866">
+                                        <Label x:Name="ItemQuantityLabel"
+                                        Text="{Binding Quantity, StringFormat='{0:F0}'}" 
+                                        TextColor="#f2ebdd"/>
+                                    </Frame>
+                                    <Image Source="expand.png"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                        <Image.Triggers>
+                                            <DataTrigger TargetType="Image"
+                                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type xct:Expander}}, Path=IsExpanded}"
+                                                     Value="True">
+                                                <Setter Property="Source"
+                                                    Value="collapse.png" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </xct:Expander.Header>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                    x:Name="EatenButton"
+                                    Text="Eaten"
+                                    TextColor="#bdda60"
+                                    BackgroundColor="#728E34"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="EatenButton_Clicked"/>
+                                <Button Grid.Column="1"
+                                    x:Name="DiscardButton"
+                                    Text="Discarded"
+                                    TextColor="RosyBrown"
+                                    BackgroundColor="#7A6F44"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="DiscardButton_Clicked"/>
+                            </Grid>
+                            </xct:Expander>
+                        </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<xtc:Popup xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
+           xmlns="http://xamarin.com/schemas/2014/forms"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           x:Class="FreshBox.Views.PopupBox"
+           IsLightDismissEnabled="False">
+    <StackLayout Margin="20,0,20,20">
+        <Label Text="Choose one..." 
+               FontSize="24" 
+               Padding="0,25,0,0"/>
+        <CollectionView x:Name="collectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnCollectionViewSelection">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!--Printed items-->
+                    <StackLayout Padding="10,10,10,10"
+                                 BackgroundColor="tan">
+                        <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium"/>
+                        <Image Source="{Binding Image}"
+                               WidthRequest="25"
+                               HeightRequest="45"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</xtc:Popup>

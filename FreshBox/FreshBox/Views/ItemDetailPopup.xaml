@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xtc:Popup xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
+           xmlns="http://xamarin.com/schemas/2014/forms"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:FreshBox.Models"
+           Size="300,330"
+           BackgroundColor="Tan"
+           x:Class="FreshBox.Views.ItemDetailPopup">
+
+    <StackLayout>
+        <Grid Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+<StackLayout BackgroundColor="Transparent">
+            <Label Grid.Row="1" Text="Name: " HorizontalOptions="Center" TextColor="Black" FontSize="25" Margin="5"/>
+            <Label Grid.Row="2"  x:Name="NameLabel" HorizontalOptions="Center" TextColor="Black" FontSize="25" Margin="5"/>
+  </StackLayout>
+
+            <Label Grid.Row="3" Text="Quantity: " HorizontalOptions="Center" TextColor="Black" FontSize="Medium" Margin="-80,0,0,0"/>
+            <Label Grid.Row="4"  x:Name="QuantityLabel" HorizontalOptions="Center" TextColor="Black" FontSize="Medium" Margin="30,-34,0,0"/>
+
+            <Label Grid.Row="5" Text="Expiration Date: " HorizontalOptions="Center" TextColor="Black" FontSize="Medium" />
+            <Label Grid.Row="6" x:Name="ExpirationDateLabel" HorizontalOptions="Center" TextColor="Black" FontSize="Medium" Padding="0,0,0,5"/>
+
+            <Label Grid.Row="7" Text="Where is it? " HorizontalOptions="Center" TextColor="Black" FontSize="Medium" />
+            <Label Grid.Row="8" x:Name="FreshBoxLabel" HorizontalOptions="Center" TextColor="Black" FontSize="Medium"/>
+        </Grid>
+    </StackLayout>
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+    <StackLayout>
+        <Label  x:Name="NameLabel"
+                TextColor="Black"/>
+        <Label  x:Name="QuantityLabel"
+                TextColor="Black"/>
+        <Label  x:Name="ExpirationDateLabel"
+                TextColor="Black"/>
+        <Label  x:Name="FreshBoxLabel"
+                TextColor="Black"/>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="1"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="0"
+                                    x:Name="EatenButton"
+                                    Text="Eaten"
+                                    TextColor="Black"
+                                    BackgroundColor="LightGreen"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="EatenButton_Clicked"/>
+                                <BoxView Grid.Column="1"
+                                     WidthRequest="1"
+                                     VerticalOptions="FillAndExpand"
+                                     HorizontalOptions="End"/>
+                                <Button Grid.Column="2"
+                                    x:Name="DiscardButton"
+                                    Text="Discarded"
+                                    TextColor="Black"
+                                    BackgroundColor="RosyBrown"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="DiscardButton_Clicked"/>
+                            </Grid>
+    </StackLayout> -->
+ </xtc:Popup>

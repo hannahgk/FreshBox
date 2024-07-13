@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ios="clr-namespace:Xamarin.CommunityToolkit.PlatformConfiguration.iOSSpecific;assembly=Xamarin.CommunityToolkit"
+             xmlns:android="clr-namespace:Xamarin.CommunityToolkit.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.CommunityToolkit"
+             xmlns:vm="clr-namespace:FreshBox.ViewModels" 
+             x:DataType="vm:AccountInfoViewModel"
+             x:Class="FreshBox.Views.AccountInfoEditPage"
+             Title="Account">
+
+    <ContentPage.BindingContext>
+        <vm:AccountInfoViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="White" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Frame Padding="15,0,0,7" BackgroundColor="White" BorderColor="White">
+                <Button Grid.Row="0" Text="DONE" TextColor="Black" HorizontalOptions="End"
+                        CornerRadius="4"
+                   Margin="5"  FontSize="12" HeightRequest="38" Clicked="DoneButton_Clicked"/>
+            </Frame>
+            
+            <Grid Grid.Row="1" BackgroundColor="AliceBlue">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackLayout VerticalOptions="Center" Grid.Column="0">
+                    <pancake:PancakeView CornerRadius="75" BackgroundColor="DarkSeaGreen" 
+                                          HorizontalOptions="CenterAndExpand" Padding="10">
+
+                        <ImageButton Source="food_Apple.jpg" BackgroundColor="DarkSeaGreen" CornerRadius="80" HorizontalOptions="CenterAndExpand" Clicked="Button_Clicked"/> <!--Source="{Binding imageUrl}"-->
+                    </pancake:PancakeView>
+
+                    <!--THis is for the slide up for upload profile pic-->
+                    
+
+                </StackLayout>
+                   
+
+                <!--make this based on profile data later-->
+                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="{Binding profileName}" TextColor="Black" HorizontalOptions="Start" 
+                           FontSize="20" VerticalOptions="Start"></Label>
+
+                    <Label Text="{Binding streetAndCity}" TextColor="Black" HorizontalOptions="Start" 
+                           FontSize="15" VerticalOptions="Start"></Label>
+
+                    <Label Text="{Binding stateAndZip}" TextColor="Black" HorizontalOptions="Start" 
+                           FontSize="15" VerticalOptions="Start"></Label>
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="5,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Text="Username: " FontFamily="CabinSketch" TextColor="HotPink" 
+                       FontSize="20"  HorizontalOptions="StartAndExpand"></Label>
+                <Entry Grid.Row="1" x:Name="profileName" Placeholder="Enter Username" 
+                       Text="{Binding profileName}" BackgroundColor="AntiqueWhite" FontSize="20" TextColor="Black"></Entry>
+
+                <Label Grid.Row="2" Text="Address line 1: " FontFamily="CabinSketch" TextColor="HotPink" 
+                       FontSize="20"  HorizontalOptions="StartAndExpand"></Label>
+                <Entry Grid.Row="3" x:Name="Address1" Placeholder="Enter Address Line 1" 
+                       Text="{Binding streetAndCity}" BackgroundColor="AntiqueWhite" FontSize="20" TextColor="Black"></Entry>
+
+                <Label Grid.Row="4" Text="Address line 2: " FontFamily="CabinSketch" TextColor="HotPink" 
+                       FontSize="20"  HorizontalOptions="StartAndExpand"></Label>
+                <Entry Grid.Row="5" x:Name="Address2" Placeholder="Enter Address Line 2" 
+                       Text="{Binding stateAndZip}" BackgroundColor="AntiqueWhite" FontSize="20" TextColor="Black"></Entry>
+            </Grid>
+        
+
+
+        <pancake:PancakeView BackgroundColor="White" VerticalOptions="StartAndExpand"  x:Name="MyDraggableView" CornerRadius="5,5,0,0" WidthRequest="80" HorizontalOptions="FillAndExpand" HeightRequest="1">
+        <ScrollView>
+            <Grid>
+            <Grid.RowDefinitions>
+                 <RowDefinition Height="10"/>
+                 <RowDefinition Height="Auto"/>
+                 <RowDefinition Height="Auto"/>
+                 <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+           <Grid Grid.Row="0">
+            <BoxView HeightRequest="2"  Margin="-22,9,-22,-5" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="Gray" WidthRequest="70"/>
+           <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Grid.GestureRecognizers>
+            </Grid>
+         
+          <StackLayout Margin="0,0,0,0" Grid.Row="1" VerticalOptions="CenterAndExpand">
+                                    <Image Source="http://xamaringuyshow.com/wp-content/uploads/2020/06/CarImg.png" 
+                                                          Aspect="AspectFill"
+                                                          WidthRequest="70"
+                                                          HeightRequest="37"
+                                                          HorizontalOptions="Center"/>
+              <Label Text="Change Profile Photo" FontAttributes="Bold" FontSize="16" TextColor="Black" Margin="15,0,10,-5"/>
+              <BoxView HeightRequest="1"  Margin="-22,9,-22,0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="GhostWhite" WidthRequest="390"/>
+
+              <Button Text="New Profile Photo" Margin="-50,0,180,-10" TextColor="DarkSlateGray" BackgroundColor="Transparent"/>
+              <Button Text="Choose an Icon" Margin="-73,0,180,-10" TextColor="DarkSlateGray" BackgroundColor="Transparent"/>
+              <Button Text="Remove Profile Photo" Margin="-23,0,180,5" TextColor="Red" BackgroundColor="Transparent"/>
+      
+           </StackLayout>
+           <Grid Grid.Row="3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="3*"/>
+               </Grid.ColumnDefinitions>
+               <Image VerticalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="80" Source="http://xamaringuyshow.com/wp-content/uploads/2020/06/GooglePay.jpeg" HorizontalOptions="CenterAndExpand"/>
+               <Image VerticalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="80" Grid.Column="1" Source="http://xamaringuyshow.com/wp-content/uploads/2020/06/PayPall-1.png" HorizontalOptions="CenterAndExpand"/>
+               <Image  VerticalOptions="CenterAndExpand" HeightRequest="80" WidthRequest="80" Grid.Column="2" Source="http://xamaringuyshow.com/wp-content/uploads/2020/06/MasterCard.png" HorizontalOptions="CenterAndExpand"/>
+           </Grid>
+        </Grid>
+        </ScrollView>
+    </pancake:PancakeView>
+
+            </Grid>
+    </ContentPage.Content>
+</ContentPage>

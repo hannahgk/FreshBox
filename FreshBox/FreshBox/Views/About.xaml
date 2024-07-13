@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreshBox.Views.About"
+             Title="About">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="AvacadoOnly.jpg"
+                   HorizontalOptions="Center"
+                   HeightRequest="140"
+                   Margin="0,30,0,10"/>
+            <Label Text="- Our Mission -"
+                   TextColor="Black"
+                   FontSize="Title"
+                   HorizontalOptions="Center" />
+            <Label Text="Allow easy tracking and organization of food, while conveniently sending notifications regarding item expiration."
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Body"
+                   HorizontalOptions="Center"
+                   Margin="30,0"/>
+            <Label Text="- About Us -"
+                   TextColor="Black"
+                   FontSize="Title"
+                   HorizontalOptions="Center" 
+                   Margin="0,20,0,0"/>
+            <Label Text="FreshBox has humble beginnings as a simple project for our team's Software Engineering course. What we didn't know, is that it would also have a humble ending. The project was finished, our team got full points for exceptional work done, and we all went our separate ways."
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"
+                   FontSize="Body"
+                   HorizontalOptions="Center" 
+                   Margin="30,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

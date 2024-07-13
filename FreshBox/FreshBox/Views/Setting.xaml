@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreshBox.Views.Setting"
+             Title="Settings">
+    <ContentPage.Content>
+        <ScrollView >
+            <StackLayout Padding="10">
+
+
+                <Button x:Name="accountInfo" Text="Account Info" TextColor="#8f663d" FontSize="Title" 
+                        HorizontalOptions="Fill" CornerRadius="10" Margin="5,21,0,0" Clicked="AccountInfoNav" />
+
+                <Button x:Name="helpcenterpage" Text="Help center" TextColor="#8f663d" FontSize="Title" 
+                        HorizontalOptions="Fill" CornerRadius="10" Margin="5,9,0,5" Clicked="HelpPageNav" />
+
+
+                <Button x:Name="NotificationPage" Text="Notification" TextColor="#8f663d" FontSize="Title" 
+                        HorizontalOptions="Fill" CornerRadius="10" Margin="5,9,0,5" Clicked="NotificationSettingsPageNav"/>
+
+                <Button x:Name="appDetails" Text="App Details" TextColor="#8f663d" FontSize="Title" 
+                        HorizontalOptions="Fill" CornerRadius="10" Margin="5,9,0,16" Clicked="AppDetailsNav"/>
+
+            
+                <Label Text="Accounts Center" TextColor="Blue" FontSize="14" HorizontalOptions="StartAndExpand" Margin="20,20,0,-15"/>
+                  <Label Text="Control settings for connected experiences across FreshBox, Google, FaceBook, and Twitter, including adding new items into your custom FreshBox and logging in." TextColor="Gray" FontSize="14" HorizontalOptions="StartAndExpand" Margin="20,20,0,40"/>
+
+
+                <Label Text="Logins" TextColor="Black" FontSize="19" HorizontalOptions="StartAndExpand" Margin="9,9,0,5"/>
+
+                 <Button x:Name="Login" Text="Log In" BackgroundColor="#EADDCA" TextColor="Blue" FontSize="16"
+                        HorizontalOptions="Fill" CornerRadius="10" Margin="5" Clicked="LoginPageNav"/>
+
+                <Button x:Name="Logout" Text="Log Out" BackgroundColor="#EADDCA" TextColor="Blue" FontSize="16" 
+                        HorizontalOptions="Fill" CornerRadius="10" Margin="5" Clicked="LogoutPageNav"/>
+
+
+              <!--  <Button x:Name="Log In" BackgroundColor="#EADDCA" Text="Log In" TextColor="Blue" FontSize="16" 
+                         CornerRadius="10" Margin="5,11,0,5" Clicked="LoginPageNav" />
+               -->
+
+                    
+
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

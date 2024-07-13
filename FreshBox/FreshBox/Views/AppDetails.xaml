@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FreshBox.Views.AppDetails"
+    Title="App Details"
+    BackgroundColor="#F8F9F9">
+    <StackLayout>
+
+
+        <StackLayout>
+
+     <Ellipse Fill="#dcc8a0"
+         Stroke="#dcc8a0"
+         StrokeThickness="4"
+              Scale="9"
+         WidthRequest="120"
+         HeightRequest="102"
+         HorizontalOptions="CenterAndExpand" Margin="0,-350,0,-12"/>
+
+<!--Copied idea Link:https://medium.muz.li/the-story-of-app-detail-page-changes-in-cafe-bazar-app-32885e54dc1c -->
+   <ImageButton Source="imageedit_2_9099013716.png" BackgroundColor="Transparent" Margin="10,197,20,10" Padding="155,9,144,10" Clicked="HomePage" BorderColor="Black"/>
+<Label  Text="Fresh Box" FontSize="24" TextColor="Black" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="21,-153,0,0"/>
+<Label  Text="App is made in Computer Science - Software Enginering F2021" FontSize="12" TextColor="Black" FontAttributes="Italic" HorizontalOptions="CenterAndExpand" Margin="21,0,0,0"/>
+
+</StackLayout>
+
+ <!--
+        <Label Text="App will be available Soon..." TextColor="Black" FontSize="20" VerticalOptions="Center" HorizontalOptions="Center" Margin="25,148,0,0"></Label>
+       
+        <Label Text="Example:" TextColor="Black" FontSize="15" VerticalOptions="Center" HorizontalOptions="Center"></Label> -->
+        <Label Text="FreshBox Inc." TextColor="Black" FontSize="12" VerticalOptions="EndAndExpand" HorizontalOptions="Center"></Label>
+        <Label Text="v 1.15" TextColor="Black" FontSize="12" VerticalOptions="End" HorizontalOptions="Center"></Label>
+        <Label Text="Made in USA" TextColor="Black" FontSize="12" VerticalOptions="End" HorizontalOptions="Center"></Label>
+    </StackLayout>
+</ContentPage>

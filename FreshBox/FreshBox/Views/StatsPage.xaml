@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" xmlns:models="clr-namespace:FreshBox.Models" 
+             x:Class="FreshBox.Views.StatsPage"
+             BackgroundColor="tan">
+    <ContentPage.BindingContext>
+        <models:Day/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ImageButton x:Name="BackButton" BackgroundColor="Transparent" Source="down_arrow.png"
+                   HorizontalOptions="Center"
+                   HeightRequest="30" WidthRequest="50" Margin="10"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton x:Name="PreviousMonthButton" Grid.Column="1"
+                        BackgroundColor="Transparent" Source="left_arrow.png"
+                        HorizontalOptions="Center" HeightRequest="30"
+                        WidthRequest="40" Margin="10" Clicked="PreviousMonthButton_Clicked"/>
+                    <Label x:Name="monthYearLabel" Grid.Column="2"
+                           FontSize="Medium" FontAttributes ="Bold"/>
+                    <ImageButton x:Name="NextMonthButton" Grid.Column="3"
+                        BackgroundColor="Transparent" Source="right_arrow.png"
+                        HorizontalOptions="Center" HeightRequest="30"
+                        WidthRequest="40" Margin="10"
+                        Clicked="NextMonthButton_Clicked"/>
+                </Grid>
+
+                <Frame CornerRadius="20"
+                       Margin="10,5,10,5"
+                       BackgroundColor="#84644D">
+                    <StackLayout>
+                        <Label x:Name="itemsEatenInMonthLabel"
+                               HorizontalOptions="Center"
+                               TextColor="#f2ebdd"
+                               FontSize="18"
+                               Margin="5,5,5,5"
+                               FontAttributes ="Bold"/>
+                        <microcharts:ChartView x:Name="EatenLineChart" HeightRequest="280"/>
+                        <Label x:Name = "dayEatenLabel" Text= "Days in Month" TextColor="#f2ebdd" HorizontalOptions="Center"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="20"
+                       Margin="10,5,10,5"
+                       BackgroundColor="#f2ebdd">
+                    <StackLayout>
+                        <Label x:Name="itemsDiscardedInMonthLabel"
+                               HorizontalOptions="Center"
+                               TextColor="#84644D"
+                               FontSize="18"
+                               Margin="5,5,5,5"
+                               FontAttributes ="Bold"/>
+                        <microcharts:ChartView x:Name="DiscardedLineChart" HeightRequest="280"/>
+                        <Label x:Name = "dayDiscardedLabel" TextColor="#84644D" HorizontalOptions="Center"  />
+                    </StackLayout>
+                </Frame>
+
+                <Frame CornerRadius="20"
+                       Margin="10,5,10,5"
+                       BackgroundColor="#B4937B">
+                    <StackLayout>
+                        <Label x:Name="itemsEatenDiscardedInMonthLabel"
+                               HorizontalOptions="Center"
+                               TextColor="#f2ebdd"
+                               FontSize="18"
+                               Margin="5,5,5,5"
+                               FontAttributes ="Bold"/>
+                        <microcharts:ChartView x:Name="EatenDiscardedDonutChart" HeightRequest="270"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="FreshBox.Views.LoginViewPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:vm="clr-namespace:FreshBox.ViewModels"
+             Visual="Material">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <Label x:Name="lblTitle" FontSize="20"/>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid Padding="20" VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+
+
+
+            <StackLayout Grid.Row="0" VerticalOptions="Center">
+                <Frame BorderColor="Brown" Padding="0,-10,0,-10" Margin="90,0,90,0" HeightRequest="250">
+                    <Image Source="Food_Avocado.png" Aspect="AspectFill"/>
+                </Frame>
+
+                <Label Text="Cognito Login" FontFamily="CabinSketch"
+                       TextColor="Purple" FontSize="40" HorizontalOptions="Center" />
+            </StackLayout>
+
+
+
+
+
+
+
+            <StackLayout Grid.Row="1" Spacing="10">
+                <Entry Placeholder="Enter Username" Text="{Binding Username}" />
+                <Entry Placeholder="Enter Password" Text="{Binding Password}" IsPassword="True" />
+            </StackLayout>
+
+
+
+
+
+
+
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Padding="10"
+                         HeightRequest="55" HorizontalOptions="Center">
+                <Button Text="Login" BackgroundColor="SandyBrown" Margin="0,0,10,0" 
+                        TextColor="GhostWhite" CornerRadius="20"
+                        Command="{Binding LoginCommand}" />
+
+                <Button Text="Register" BackgroundColor="SandyBrown" Margin="10,0,0,0"
+                        TextColor="GhostWhite" CornerRadius="20"
+                        Command="{Binding RegisterCommand}" />
+            </StackLayout>
+
+
+
+
+            <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Center">
+                <ImageButton Source="icon_google.png" BackgroundColor="Transparent" Clicked="ImageButton_Clicked"></ImageButton>
+                <ImageButton Source="icon_facebook.png" BackgroundColor="Transparent" Clicked="ImageButton_Clicked"></ImageButton>
+                <ImageButton Source="icon_twitter.png" BackgroundColor="Transparent" Clicked="ImageButton_Clicked"></ImageButton>
+            </StackLayout>
+        </Grid>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <!--
+        <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Cognito Login" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Entry x:Name="UserNameTextBox" Placeholder="UserName" Text="Username" Margin="20,10,20,0" PlaceholderColor="White" TextColor="Black"/>
+        <Entry x:Name="PasswordTextBox" Placeholder="Password" Text="Password" Margin="20,10,20,10" PlaceholderColor="White" TextColor="Black"/>
+        <Button Clicked="Button_Clicked" Text="Login" Margin="20,10,20,0"/>
+        <Button Clicked="Button_Clicked_1" Text="Sign Up" Margin="20,10,20,0"/>
+        <Button Clicked="Button_Clicked_2" Text="Biometric Login" Margin="20,10,20,0"/>
+            <Label Text="Id Token Values:" FontSize="18" FontAttributes="Bold"/>
+            <ListView x:Name="lstToken" SeparatorColor="White" BackgroundColor="Transparent" Margin="0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout VerticalOptions="Center">
+                                <Label Text="{Binding}}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                </ListView>
+          </StackLayout>
+        -->
+
+        <!--<StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

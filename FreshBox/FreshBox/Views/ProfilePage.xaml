@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FreshBox.Views.ProfilePage"
+    Title="Profile Page">
+    <ContentPage.Content>
+        <Grid BackgroundColor="White" >
+             
+            <Grid.RowDefinitions>
+                <RowDefinition Height="170"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                
+                <StackLayout VerticalOptions="Center" Grid.Column="0">
+                    <Frame BackgroundColor="#9fdf9f" Margin="20" HorizontalOptions="Center" WidthRequest="75" HeightRequest="75" CornerRadius="75"></Frame>
+                </StackLayout>
+                <!--make this based on profile data later-->
+                <StackLayout Grid.Column="1" Padding="0,40,0,0">
+                    <Label Text="edit" TextColor="Black" HorizontalOptions="Start" FontSize="12" VerticalOptions="Start"></Label>
+                    <Label Text="Profile Name" TextColor="Black" HorizontalOptions="Start" FontSize="18" VerticalOptions="Start"></Label>
+                    <Label Text="Address, City" TextColor="Black" HorizontalOptions="Start" FontSize="15" VerticalOptions="Start"></Label>
+                    <Label Text="State, ZIP" TextColor="Black" HorizontalOptions="Start" FontSize="15" VerticalOptions="Start"></Label>
+                </StackLayout>
+                
+
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

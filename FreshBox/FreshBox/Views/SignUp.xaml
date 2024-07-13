@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FreshBox.Views.SignUp"
+    NavigationPage.HasNavigationBar="False"
+    Visual="Material">
+   <StackLayout>
+        <Frame BackgroundColor="Tan" Padding="24" CornerRadius="0">
+            <Label Text="FreshBox Sign Up" HorizontalTextAlignment="Center" TextColor="black" FontSize="36"/>
+        </Frame>
+        <ScrollView>
+            <StackLayout>
+                <Entry x:Name="NameTextBox" Placeholder="Enter Name" Margin="20,20,20,-5" Text="{Binding Name}" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="GhostWhite"/>
+                <Entry x:Name="UserNameTextBox" Placeholder="Enter UserName" Text="{Binding UserName}" Margin="20,20,20,-5" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="GhostWhite"/>
+                <Entry x:Name="PasswordTextBox" Placeholder="Enter Password" Text="{Binding Password}" Margin="20,20,20,-5" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="GhostWhite"/>
+                <Entry x:Name="EmailTextBox" Placeholder="Enter Email" Margin="20,20,20,-5" Text="{Binding Email}" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="GhostWhite"/>
+                <Button Clicked="Button_Clicked" Text="Sign Up" Margin="20,10,20,0"/>
+                <Label Text="After successfully signed up, please check your email and type in the confirmation number in." TextColor="DarkGray" Margin="15,15,0,5"/>
+                <Entry Placeholder="Confirmation Code" x:Name="ConfirmationTextBox" Text="{Binding Confirmation}" Margin="20" PlaceholderColor="Gray" TextColor="Black" BackgroundColor="GhostWhite"/>
+                <Button Text="Confirm Email" Clicked="Button_Clicked_1" Margin="20,10,20,25"/>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

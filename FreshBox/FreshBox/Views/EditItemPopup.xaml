@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xtc:Popup xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
+           xmlns="http://xamarin.com/schemas/2014/forms"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           Size="300,500"
+           BackgroundColor="Tan"
+           x:Class="FreshBox.Views.EditItemPopup">
+    <StackLayout Margin="20, 20, 20, 20">
+        <Entry x:Name="nameEntry"
+               Placeholder="Enter Item name here" 
+               PlaceholderColor="LightGray" TextColor="Black"/>
+        <Label Text="Enter Expiration Date" TextColor="Black" Margin="10,0"/>
+        <DatePicker x:Name="expiryDatePicker" Margin="10,0" TextColor="Black"/>
+        <Label Text="Enter Item quantity here" TextColor="Black" Margin="10,0"/>
+        <StackLayout Orientation="Horizontal" Margin="10,0">
+            <Label x:Name="quantityLabel"
+                   Text="{Binding Source={x:Reference quantityStepper}, Path=Value}"
+                   TextColor="Black"
+                   FontSize="Large"
+                   VerticalOptions="CenterAndExpand"/>
+            <Stepper x:Name="quantityStepper"
+                     Minimum="1"
+                     Value="1"
+                     Maximum="10000"
+                     Increment="1"/>
+        </StackLayout>
+        <Button Text="Edit Item"
+                TextColor="Black"
+                Clicked="EditItemButtonClicked" />
+    </StackLayout>
+</xtc:Popup>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FreshBox.Views.NotificationSettingsPage"
+             Title="Notification">
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <!--<Label Text="Notification Settings will go here. The user 
+                   will be able to control how often they are notified of expiring items.
+
+                   When would you like to be notified that your item will expire?
+                   -*numberPicker* days before (less than 30)
+
+                   When would you like to be reminded to look at your expiration list?
+                   -Every *day picker* at *time picker*"/>-->
+            <Label Text="How many days would you like to set ahead of time before the day of expire item(s)?"  TextColor="Black" FontSize="16" Margin="5,12,0,10"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Frame Padding="5,0,5,0" Margin="68,1,9,9">
+                <Label x:Name="dayLabel"
+                       BindingContext="{x:Reference dayStepper}"
+                       Text="{Binding Value}"
+                       VerticalOptions="Center"
+                       FontSize="Title" TextColor="Black" Margin="5,5,5,0"/>
+                    </Frame>
+                <Stepper x:Name="dayStepper"
+                         Minimum="1"
+                         Value= "1"
+                         Maximum="30"
+                         Increment="1"
+                         ValueChanged="DayStepper_ValueChanged"/>
+            </StackLayout>
+            <Label Text="What time in a day would you like to be set as..." TextColor="Black" FontSize="16" Margin="8,20,8,8"/>
+            
+            <TimePicker x:Name="notifyTimePicker"
+                        Time="12:00"
+                        Unfocused="NotifyTimePicker_Unfocused" TextColor="Black" BackgroundColor="Tan" Margin="120,5,159,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

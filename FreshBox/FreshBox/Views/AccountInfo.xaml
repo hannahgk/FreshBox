@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:ios="clr-namespace:Xamarin.CommunityToolkit.PlatformConfiguration.iOSSpecific;assembly=Xamarin.CommunityToolkit"
+    xmlns:android="clr-namespace:Xamarin.CommunityToolkit.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.CommunityToolkit"
+    xmlns:vm="clr-namespace:FreshBox.ViewModels" 
+    x:DataType="vm:AccountInfoViewModel"
+    x:Class="FreshBox.Views.AccountInfo"
+    Title="Account"
+    Visual="Material">
+    <ContentPage.BindingContext>
+        <vm:AccountInfoViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="White" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Text="EDIT" TextColor="Black" HorizontalOptions="End" 
+                    Margin="5" FontSize="12" Clicked="EditButton_Clicked"></Button>
+            <Grid Grid.Row="1" BackgroundColor="AliceBlue">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout VerticalOptions="Center" Grid.Column="0">
+                    <pancake:PancakeView CornerRadius="75" BackgroundColor="DarkSeaGreen" 
+                                          HorizontalOptions="CenterAndExpand" Padding="10">
+<!--                        <Image Source="{Binding imageUrl}"/> -->
+
+                       <Image Source="food_Apple.jpg" BackgroundColor="DarkSeaGreen" HorizontalOptions="CenterAndExpand" />
+                    </pancake:PancakeView>
+                </StackLayout>
+
+                <!--make this based on profile data later-->
+                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                    <Label Text="{Binding profileName}" TextColor="Black" HorizontalOptions="Start" 
+                           FontSize="20" VerticalOptions="Start"></Label>
+
+                    <Label Text="{Binding streetAndCity}" TextColor="Black" HorizontalOptions="Start" 
+                           FontSize="15" VerticalOptions="Start"></Label>
+
+                    <Label Text="{Binding stateAndZip}" TextColor="Black" HorizontalOptions="Start" 
+                           FontSize="15" VerticalOptions="Start"></Label>
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="5,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Text="Username: " FontFamily="CabinSketch" TextColor="HotPink" 
+                       FontSize="20"  HorizontalOptions="StartAndExpand"></Label>
+                <Frame Grid.Row="1" BorderColor="DarkSlateGray" >
+                    <Label FontSize="25" Margin="-15" Text="{Binding profileName}"></Label>
+                </Frame>
+
+                <Label Grid.Row="2" Text="Address line 1: " FontFamily="CabinSketch" TextColor="HotPink" 
+                       FontSize="20"  HorizontalOptions="StartAndExpand"></Label>
+                <Frame Grid.Row="3" BorderColor="DarkSlateGray" >
+                    <Label FontSize="25" Margin="-15" Text="{Binding streetAndCity}"></Label>
+                </Frame>
+
+                <Label Grid.Row="4" Text="Address line 2: " FontFamily="CabinSketch" TextColor="HotPink" 
+                       FontSize="20"  HorizontalOptions="StartAndExpand"></Label>
+                <Frame Grid.Row="5" BorderColor="DarkSlateGray" >
+                    <Label FontSize="25" Margin="-15" Text="{Binding stateAndZip}"></Label>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

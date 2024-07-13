@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:xct="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             xmlns:anim="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:viewmodels="clr-namespace:FreshBox.ViewModels" xmlns:control="http://xamarin.com/schemas/2014/forms"
+             x:Class="FreshBox.Views.AboutPage"
+             Shell.NavBarIsVisible="False">
+  
+    <ContentPage.BindingContext>
+        <viewmodels:AboutViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary  xmlns:converters="clr-namespace:FreshBox.Converters;assembly=FreshBox">
+            <converters:ScrollValueConverter x:Key="ScrollValueConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.RowSpan="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+        
+            <!--Sliding Frames-->
+
+            <!--Search Bar-->
+            <RefreshView RefreshColor="Green"
+                         Grid.Row="0"
+                         Grid.RowSpan="3"
+                         IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+                         Command="{Binding RefreshCommand}">
+                <ScrollView HorizontalScrollBarVisibility="Always" HorizontalOptions="FillAndExpand">
+                   <ScrollView.Behaviors>
+                        <anim:ScrollViewScrollBehavior x:Name="Scroll" />
+                    </ScrollView.Behaviors>
+                        <StackLayout Margin="20,150,20,0"> <!--This if for to move whole part of the search bar frame-->
+
+                            <Frame CornerRadius="30"
+                                   Padding="0,3,0,0"> <!--This is for the search bar entery-->
+                               <StackLayout x:Name="searchFrame" HeightRequest="48">
+                                   <SearchBar x:Name="searchBar"
+                                              BackgroundColor="#ffff"
+                                              Placeholder = "Search items..."
+                                              SearchButtonPressed="moreSearchResults_ClickedAsync"
+                                              CancelButtonColor="Tan"
+                                              PlaceholderColor="Tan"
+                                              TextColor="#84644D"
+                                              TextTransform="Lowercase"
+                                              HorizontalTextAlignment="Center"
+                                              FontSize="Medium"
+                                              FontAttributes="Italic"
+                                              TextChanged="OnTextChanged" />
+                                    <ListView x:Name="searchResults" ItemSelected="SearchResults_ItemSelectedAsync" VerticalScrollBarVisibility="Never">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextCell Text="{Binding Name}"
+                                                          Detail = "{Binding ExpiryDate,StringFormat='{}{0:MM/dd/yyyy}'}" 
+                                                          TextColor="#84644D"
+                                                          DetailColor="Tan"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <ListView.Footer>
+                                            <StackLayout>
+                                                    <Button x:Name="moreSearchResults"
+                                                    Text="More..."
+                                                    TextColor="#84644D"
+                                                    BackgroundColor="#f2ebdd"
+                                                    Clicked="moreSearchResults_ClickedAsync"/>
+                                                    <Label x:Name="endOfSearchResults" Padding="5" HorizontalTextAlignment="Center" Text="end of results" FontAttributes="Italic" FontSize="10"/>
+                                            </StackLayout>
+                                    </ListView.Footer>
+                                    </ListView>
+                               </StackLayout>
+                            </Frame>
+                             <!--End of Search Bar-->
+                        
+                            <!--Date-->
+                              <Label Text="{Binding Today}" Margin="0,10" TextColor="#84644D" HorizontalOptions="Center" FontSize="Title" FontAttributes="Bold" Padding="2"></Label>
+                            <!--End of Date-->
+
+                             <!--Analytics-->
+                            <Frame Background="#f2ebdd"
+                                   HeightRequest="320"
+                                   CornerRadius="20"
+                                   Margin="0,0,0,20">
+                               <StackLayout>
+                                   <Label x:Name="monthYearLabel"
+                                    HorizontalOptions="Center"
+                                    TextColor="#84644D"
+                                    FontSize="18"
+                                    Margin="5,5,5,5"
+                                    FontAttributes ="Bold"/>
+                                    <microcharts:ChartView x:Name="EatenLineChart" HeightRequest="220"/>
+                                    <Label x:Name = "dayEatenLabel" TextColor="#84644D" HorizontalOptions="Center"/>
+                                    <Frame BackgroundColor="Transparent" WidthRequest="20" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                                        <Image Source="down_arrow.png"></Image>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="StatsPageNav" NumberOfTapsRequired="1" />
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                               </StackLayout>
+                            </Frame>
+                <!--End of Analytics-->
+                            
+
+                            <Frame BackgroundColor="#f2ebdd" WidthRequest="500" HeightRequest="120" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Padding="5,5,15,5" CornerRadius="10" Margin="0,0,0,80">
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="Favorite FreshBoxes" TextColor="#84644D" FontAttributes="Bold" FontSize="15" Padding="0" Margin="10,0,0,-5"></Label>
+
+                                    <StackLayout Orientation="Horizontal" >
+                                        <CollectionView x:Name="FavFreshBoxes" SelectionMode="Single" ItemsLayout="HorizontalList" SelectionChanged="OnFreshBoxCollectionViewSelection">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame BackgroundColor="#f2ebdd" Padding="0" WidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                        <Frame Margin="5" Padding="8" CornerRadius="10">
+                                                            <StackLayout Orientation="Vertical">
+                                                                <Image Source="{Binding Image}"
+                                                                       BackgroundColor="Transparent"
+                                                                       WidthRequest="60"
+                                                                       Margin="0,0,0,-5"/>
+                                                                <Label Text="{Binding Name}"
+                                                                       LineBreakMode="TailTruncation"
+                                                                       TextColor="Black"
+                                                                       VerticalTextAlignment="End"
+                                                                       HorizontalTextAlignment="Center"
+                                                                       FontSize="Micro"/>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                            <CollectionView.EmptyView>
+                                                <Label Text="None" FontSize="20" TextColor="#84644D" Padding="30,0,0,0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                                            </CollectionView.EmptyView>
+                                        </CollectionView>
+                                        <Frame BackgroundColor="Transparent" Padding="0" HasShadow="False">
+                                             <Image Source="right_arrow.png" HeightRequest="20" WidthRequest="20" Margin="0,0,0,20"></Image>
+                                        </Frame>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                </ScrollView>
+            </RefreshView>
+
+            <!--Top Bar Light gray.-->
+            <Frame x:Name="TopBar"
+                       Margin="10"
+                       Padding="10"
+                       BackgroundColor="#f7f7f7"
+                       Grid.Row="0" HorizontalOptions="FillAndExpand"
+                       TranslationY="{Binding RelativeScrollY, 
+                                      Source={x:Reference Scroll},
+                                      Converter={StaticResource ScrollValueConverter}, 
+                                      ConverterParameter='-5;0;80;false;0'}">
+            <!--Item List-->
+            <StackLayout Orientation="Vertical">
+                    <Label Text="Items Expiring Soon" TextColor="DarkSlateGray" FontAttributes="Bold" FontSize="15"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <CollectionView x:Name="ExpiringSoon" EmptyView="No items to display" SelectionMode="Single" SelectionChanged="OnItemCollectionViewSelection">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="Transparent" Margin="1" Padding="3,0" WidthRequest="110" >
+                                            <Frame Margin="3" Padding="10" CornerRadius="10">
+                                                <StackLayout Orientation="Vertical">
+                                                    <Label TextColor="DarkSlateGray"
+                                                           VerticalOptions="StartAndExpand"
+                                                           HorizontalOptions="Center"
+                                                           Text="{Binding Name}" FontSize="15"
+                                                           LineBreakMode="TailTruncation"
+                                                           Font="Bold"/> 
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label TextColor="DarkSlateGray"
+                                                           VerticalOptions="Start"
+                                                           HorizontalOptions="EndAndExpand"
+                                                           HorizontalTextAlignment="End"
+                                                           Text="Qty:" FontSize="9"
+                                                           Font="Bold"/> 
+                                                        <Label TextColor="DarkSlateGray"
+                                                           VerticalOptions="Start"
+                                                           HorizontalOptions="StartAndExpand"
+                                                           HorizontalTextAlignment="Start"
+                                                           Text="{Binding Quantity}" FontSize="9"
+                                                           Font="Bold"/> 
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                             <CollectionView.Footer>
+                                <StackLayout>
+                                    <Frame BackgroundColor="Transparent">
+                                        <Label TextColor="DarkSlateGray"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="Center"
+                                            Text="More" FontSize="15"
+                                            Font="Bold"/> <!--Able to click on the items fridge -->
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ExpirationPageNav" NumberOfTapsRequired="1"></TapGestureRecognizer>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                </StackLayout>
+                            </CollectionView.Footer>
+                        </CollectionView>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            
+
+        </Grid>
+
+        <!--Bottom Nav Bar-->
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Frame Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" CornerRadius="10"/>
+            <Frame Grid.Column="3" Grid.ColumnSpan="2" Margin="0,5,0,0" CornerRadius="10"/>
+
+            <StackLayout Margin="0,0,0,-10" BackgroundColor="Transparent" Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="10,10,10,12" Grid.Column="0">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="FlyoutPageNav" NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+                <Image Source="profile.png" HeightRequest="26" WidthRequest="30"></Image>
+                  <Label Text="Menu" FontSize="9" TextColor="Black" HorizontalOptions="Center"></Label>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,-10" BackgroundColor="Transparent" Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="10,10,10,12" Grid.Column="1">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="FreshBoxPageNav" NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+                <Image Source="freshboxes.png" HeightRequest="26" WidthRequest="30"></Image>
+                 <Label Text="FreshBox" FontSize="9" TextColor="Black" HorizontalOptions="Center"></Label>
+
+            </StackLayout>
+
+            <!-- BUTTON FOR ADDING ITEM, INSERT LINK HERE :) -->
+            <StackLayout Orientation="Vertical"  HorizontalOptions="Center" Grid.Column="2" Padding="0,0,0,10">
+                <Button x:Name="ButtonScan" BackgroundColor="#bdda60" ImageSource="plus.png" HorizontalOptions="Center" WidthRequest="60" HeightRequest="60" CornerRadius="30" ></Button>
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,-10" BackgroundColor="Transparent" Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="10,10,10,12" Grid.Column="3">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ExpirationPageNav" NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+                <Image Source="expiration.png" HeightRequest="26" WidthRequest="30"></Image>
+                <Label Text="Expire List" FontSize="9" TextColor="Black" HorizontalOptions="Center"></Label>
+
+            </StackLayout>
+
+            <StackLayout Margin="0,0,0,-10" BackgroundColor="Transparent" Orientation="Vertical"  HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="10,10,10,12" Grid.Column="4">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="StatsPageNav" NumberOfTapsRequired="1" />
+                </StackLayout.GestureRecognizers>
+                <Image Source="analytics.png" HeightRequest="26" WidthRequest="30"></Image>
+              <Label Text="Analytics" FontSize="9" TextColor="Black" HorizontalOptions="Center"></Label>
+
+            </StackLayout>
+        </Grid>
+    </Grid>
+    
+    
+</ContentPage>
+

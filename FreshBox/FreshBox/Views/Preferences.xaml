@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FreshBox.Views.Preferences"
+    Title="Preferences">
+    <ContentPage.Content>
+        <ScrollView >
+            <StackLayout Padding="10">
+                <Button x:Name="notifications" Text="Notifications" TextColor="#8f663d" FontSize="Title" HorizontalOptions="Fill" CornerRadius="10" Margin="5" Clicked="NotificationSettings_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

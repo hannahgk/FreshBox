@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:FreshBox.ViewModels"
+             x:Class="FreshBox.Views.FreshBoxPage"
+             BackgroundColor="White"
+             Title="FreshBoxes">
+    <StackLayout Margin="20,10">
+        <ImageButton x:Name="BackButton" BackgroundColor="Transparent" Source="down_arrow.png"
+                   HorizontalOptions="Center"
+                   HeightRequest="30" WidthRequest="50" Margin="10"/>
+        <CollectionView x:Name="collectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnCollectionViewSelection">
+            <CollectionView.EmptyView>
+                <StackLayout>
+                    <Label
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                TextColor="tan"
+                                HorizontalTextAlignment="Center"
+                                Text="You haven't added any FreshBoxes yet." />
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!--Printed items-->
+                    <Frame BackgroundColor="Transparent" Padding="0">
+                        <Frame Padding="0" Margin="0,10" CornerRadius="10">
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
+                                                   BackgroundColor="PaleVioletRed"
+                                                   Clicked="OnDeleteSwipeItem"/>
+                                        <SwipeItem Text="Edit"
+                                                   BackgroundColor="DeepSkyBlue"
+                                                   Clicked="OnEditSwipeItem"/>
+                                        <SwipeItem Text="Fav"
+                                                   BackgroundColor="Yellow"
+                                                   Clicked="OnFavSwipeItem"/>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <StackLayout Padding="10,10" BackgroundColor="tan" Orientation="Horizontal">
+                                    <Image Source="{Binding Image}" HeightRequest="80" Margin="0"/>
+                                    <Label Text="{Binding Name}" TextColor="Black" FontSize="20" Margin="0"/>
+
+                                </StackLayout>
+                            </SwipeView>
+                        </Frame>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <!--<CollectionView.Footer>
+                    
+            </CollectionView.Footer>-->
+        </CollectionView>
+        <StackLayout Padding="10,10" BackgroundColor="#f2ebdd" Orientation="Horizontal">
+            <!--<ImageButton
+                        BackgroundColor="Transparent"
+                        HeightRequest="100"
+                        Source="plus.png"
+                        Clicked="AddFreshBoxButtonClicked"/>-->
+            <ImageButton Source="other3.png" HorizontalOptions="Center"
+                                  BackgroundColor="Transparent"
+                                  HeightRequest= "80"
+                                  Margin="50,0,0,0"
+                                  Clicked="AddFreshBoxButtonClicked"/>
+            <Button Text="Add FreshBox"
+                             BackgroundColor="Transparent"
+                             TextColor="tan"
+                             FontSize="20"
+                             FontAttributes="Bold"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Clicked="AddFreshBoxButtonClicked"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
